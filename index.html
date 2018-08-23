@@ -30,6 +30,11 @@
     var callback = function(response) {
       console.log(response);
       // statusChangeCallback(response);
+      if(response.status === 'connected'){
+        document.querySelector('#authBtn').value = 'Logout';
+      } else {
+        document.querySelector('#authBtn').value = 'Login';
+      }
     }
     FB.getLoginStatus(callback);
 
@@ -46,10 +51,11 @@
   </script>
 </head>
 <body>
+  <input type="button" id="authBtn" value="checking...">
   <h1><a href="index.html">WEB</a></h1>
   <input id="night_day" type="button" value="night" onclick="
     nightDayHandler(this);
-  ">http://localhost:8080/index.html
+  ">
   <ol>
     <li><a href="1.html">HTML</a></li>
     <li><a href="2.html">CSS</a></li>
