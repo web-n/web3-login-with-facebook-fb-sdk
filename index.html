@@ -27,7 +27,7 @@
     //    your app or not.
     //
     // These three cases are handled in the callback function.
-    var callback = function(response) {
+    var loginStatusCallback = function(response) {
       console.log(response);
       var btn = document.querySelector('#authBTN');
       if(response.status === 'not_authorized'){
@@ -36,7 +36,7 @@
         btn.value = "Logout";
       }
     }
-    FB.getLoginStatus(callback);
+    FB.getLoginStatus(loginStatusCallback);
 
   };
 
@@ -51,7 +51,19 @@
   </script>
 </head>
 <body>
-  <input type="button" id="authBTN" value="checking...">
+  <input type="button" id="authBTN" value="checking..." onclick="
+    if(this.value === 'Login'){
+      FB.login(function(response){
+        console.log('Login=>', response);
+        loginStatusCallback(response);
+      });
+    } else {
+      FB.logout(function(response){
+        console.log('Logout=>', response);
+        loginStatusCallback(response);
+      })
+    } 
+  ">
   <h1><a href="index.html">WEB</a></h1>
   <input id="night_day" type="button" value="night" onclick="
     nightDayHandler(this);
