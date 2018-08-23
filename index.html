@@ -6,6 +6,15 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="colors.js"></script>
   <script>
+    var loginStatusCallback = function(response) {
+      console.log(response);
+      var btn = document.querySelector('#authBTN');
+      if(response.status === 'not_authorized'){
+        btn.value = "Login";
+      } else {
+        btn.value = "Logout";
+      }
+    }
     
     window.fbAsyncInit = function() {
     FB.init({
@@ -27,15 +36,6 @@
     //    your app or not.
     //
     // These three cases are handled in the callback function.
-    var loginStatusCallback = function(response) {
-      console.log(response);
-      var btn = document.querySelector('#authBTN');
-      if(response.status === 'not_authorized'){
-        btn.value = "Login";
-      } else {
-        btn.value = "Logout";
-      }
-    }
     FB.getLoginStatus(loginStatusCallback);
 
   };
